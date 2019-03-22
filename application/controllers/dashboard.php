@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller {
 
     public function index() {
         //TODO: dashboard
-        echo "View the dashboard";
+        $this->load->view("templates/header_view");
     }
 
 } //class ends
