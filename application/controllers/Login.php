@@ -57,7 +57,8 @@ class Login extends CI_Controller {
             'first_name' => 'siddharth',
             'last_name'  => 'isaiah',
             'email'      => 'siddharthisaiah@gmail.com',
-            'logged_in'  => TRUE
+            'logged_in'  => TRUE,
+            'user_role'  => 'admin'
         );
 
         $this->session->set_userdata($session_data);

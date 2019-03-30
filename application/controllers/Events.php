@@ -7,7 +7,11 @@ class Events extends CI_Controller {
     }
 
     public function index() {
-        echo $this->uri->segment(0);
+        $data['title'] = 'Volleyball | Events';
+        $this->load->view("templates/header_view", $data);
+        $this->load->view("events_view");
+        $this->load->view("templates/footer_view");
+        
     }
 
 } //class ends

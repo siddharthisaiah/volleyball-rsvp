@@ -10,6 +10,8 @@ class Dashboard extends CI_Controller {
         //TODO: dashboard
         $data['title'] = 'Home | BKK Volleyball';
         $this->load->view("templates/header_view", $data);
+        $this->load->view("dashboard");
+        $this->load->view("templates/footer_view");
     }
 
 } //class ends
