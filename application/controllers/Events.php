@@ -14,4 +14,12 @@ class Events extends CI_Controller {
         
     }
 
+    public function create()
+    {
+        $data['title'] = 'New Event | Volleyball';
+        $this->load->view("templates/header_view", $data);
+        $this->load->view("create_event_view");
+        $this->load->view("templates/footer_view");
+    }
+
 } //class ends

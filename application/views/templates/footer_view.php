@@ -47,6 +47,13 @@
 
 	<!-- Toastr -->
 	<script src="static/js/plugins/toastr/toastr.min.js"></script>
+
+	<!-- Date picker -->
+        <script src="static/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+
+	<!-- Clock picker -->
+	<script src="static/js/plugins/clockpicker/clockpicker.js"></script>
 	
     </body>
 </html>

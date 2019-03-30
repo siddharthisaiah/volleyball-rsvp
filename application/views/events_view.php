@@ -46,9 +46,11 @@
                 </div>
                 <div class="ibox-content">
 		    <div class="pull-right">
-                        <button type="button" class="btn btn-rounded btn-circle btn-primary">
-                            <i class="fa fa-plus"></i>
-			</button>
+                        <a href="events/create">
+			    <button type="button" class="btn btn-rounded btn-circle btn-primary">
+				<i class="fa fa-plus"></i>
+			    </button>
+			</a>
 		    </div>
                     <div>
                         <table class="table">
