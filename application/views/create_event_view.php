@@ -76,7 +76,7 @@
 			    </div>
 			</div>
 
-                        <div class="">
+                        <div class="form-group">
                             <label for="event_time">Time</label>
                             <div class="input-group clockpicker">
                                 <span class="input-group-addon">
@@ -84,6 +84,11 @@
 				</span>
 				<input name="event_time" type="text" class="form-control" value="09:30" />
 			    </div>
+			</div>
+
+                        <div class="form-group">
+                            <label for="event_limit">Member limit</label>
+                            <input name="event_limit" type="number" min="1" class="form-control" />
 			</div>
 
                         <br/>
