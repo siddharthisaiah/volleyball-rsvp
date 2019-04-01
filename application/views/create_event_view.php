@@ -55,7 +55,7 @@
 
                     <!-- create form goes here -->
 
-                    <form role="form">
+                    <form id="create-form" method="POST">
                         <div class="form-group">
                             <label for="event_name">Name</label>
                             <input name="event_name" type="text" class="form-control" placeholder="Volleyball Meetup" />
@@ -94,8 +94,8 @@
                         <br/>
 			
                         <div class="text-center">
-                            <button class="btn btn-success">Save</button>
-                            <button class="btn btn-warning">Cancel</button>
+                            <button id="create-event" class="btn btn-success">Save</button>
+                            <button id="cancel-event" class="btn btn-warning">Cancel</button>
 			</div>
 
 
@@ -130,6 +130,49 @@
 
 	 $('.clockpicker').clockpicker();
 
+
+	 $('#create-event').click(function(e) {
+	     e.preventDefault(); // do not reload the page
+	     var eventName = $('input[name=event_name]').val();
+	     var eventDescription = $('input[name=event_description]').val();
+	     var eventDate = $('input[name=event_date]').val();
+	     var eventTime = $('input[name=event_time]').val();
+	     var eventLimit = $('input[name=event_limit]').val();
+
+	     
+	     // do some validation here
+
+
+	     $.ajax({
+		 url: base_url + "/events/create_form",
+		 type: "POST",
+		 data: {
+		     event_name : eventName,
+		     event_description: eventDescription,
+		     event_date: eventDate,
+		     event_time: eventTime,
+		     event_limit: eventLimit
+		 },
+
+		 success: function(response) {
+		     response = JSON.parse(response);
+		     alert(response.message);
+		     location.reload();
+		     
+		 },
+
+		 error: function(response) {
+		     response = JSON.parse(response);
+		     alert(response.message);
+		 }
+	     });
+
+	 });
+
+	 $('#cancel-event').click(function(e) {
+	     e.preventDefault(); // do not reload the page
+	     $('#create-form').trigger("reset");
+	 });
 
      });
     </script>

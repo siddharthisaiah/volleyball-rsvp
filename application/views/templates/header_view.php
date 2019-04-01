@@ -26,6 +26,9 @@
 	<link href="static/css/style.css" rel="stylesheet">
 
 	<script src="static/js/jquery-3.1.1.min.js"></script>
+        <script>
+	 var base_url = "<?php echo base_url(); ?>";
+        </script>
 
     </head>
 
