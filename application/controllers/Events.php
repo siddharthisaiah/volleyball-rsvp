@@ -49,4 +49,20 @@ class Events extends CI_Controller {
         }
     }
 
+    public function delete()
+    {
+        $event_id = $this->input->post('event_id');
+        $delete_event = $this->events_model->delete_event($event_id);
+
+        if($delete_event)
+        {
+            echo json_encode(array("status" => "success", "message" => "Event deleted successfully"));
+        }
+        else
+        {
+            echo json_encode(array("status" => "failure", "message" => "Event could not be deleted. Please try again later"));
+        }
+        
+    }
+
 } //class ends

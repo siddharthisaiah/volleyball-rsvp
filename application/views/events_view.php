@@ -22,9 +22,9 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Upcoming Volleyball meetups</h5>
-		    
-                    
-		    
+
+
+
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -33,8 +33,8 @@
                             <i class="fa fa-wrench"></i>
                         </a>
 
-                        
-			
+
+
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#">Fuck you!</a>
                             </li>
@@ -64,48 +64,72 @@
                             <tbody>
 
 				<?php foreach ($events as $event) { ?>
-                                <tr>
-                                    <td>
-					<?php echo $event['event_date']; ?>
-				    </td>
-                                    <td>
-					<?php echo $event['time']; ?>
-				    </td>
-                                    <td>
-					<?php echo $event['name']; ?>
-				    </td>
+                                    <tr>
+					<input name="event-id" type="hidden" value="<?php echo $event['id']; ?>"/>
+					<td>
+					    <?php echo $event['event_date']; ?>
+					</td>
+					<td>
+					    <?php echo $event['time']; ?>
+					</td>
+					<td>
+					    <?php echo $event['name']; ?>
+					</td>
 
-				    <?php if($this->session->userdata('user_role') == 'admin') { ?>
-				    <td>
-                                        <button class="btn btn-group btn-rounded btn-circle">
-                                            <i class="fa fa-pencil"></i>
-					</button>
-				    </td>
-                                    <td>
-					<button class="btn btn-group btn-rounded btn-circle">
-                                            <i class="fa fa-trash"></i>
-					</button>
-				    </td>
-				    <?php } ?>
+					<?php if($this->session->userdata('user_role') == 'admin') { ?>
+					    <td>
+						<a href="events/update/<?php echo $event['id']; ?>" class="update-event btn btn-group btn-rounded btn-circle">
+						    <i class="fa fa-pencil"></i>
+						</a>
+					    </td>
+					    <td>
+						<a class="delete-event btn btn-group btn-rounded btn-circle">
+						    <i class="fa fa-trash"></i>
+						</a>
+					    </td>
+					<?php } ?>
 
-                                </tr>
+                                    </tr>
 				<?php } ?>
                             </tbody>
                         </table>
 		    </div>
 
-		    
+
                 </div>
 
             </div>
         </div>
-
-
-
     </div>
-
-
-
-
-
 </div>
+
+
+<script>
+ $('.delete-event').click(function() {
+     var eventId = $(this).closest('tr').find("input[name='event-id']").val();
+
+     var confirmDelete = confirm("Are you sure you want to delete this event?");
+
+     if(confirmDelete) {
+
+	 $.ajax({
+	     url: base_url + 'events/delete',
+	     type: "POST",
+	     data: {
+		 event_id: eventId
+	     },
+
+	     success: function(response) {
+		 response = JSON.parse(response);
+		 alert(response.message);
+		 location.reload();
+	     },
+
+	     error: function(response) {
+		 response = JSON.parse(response);
+		 alert(response.message);
+	     }
+	 });
+     }
+ });
+</script>

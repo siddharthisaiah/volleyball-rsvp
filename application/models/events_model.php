@@ -32,4 +32,11 @@ class events_model extends CI_Model {
     }
 
 
+    public function delete_event($event_id)
+    {
+        $this->db->where('id', $event_id);
+        return $this->db->delete('events');
+    }
+
+
 } //class ends
