@@ -3,7 +3,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Create a New Event</h2>
+        <h2>Update Event</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="home">Home</a>
@@ -13,7 +13,7 @@
             </li>
 
             <li class="active">
-                <strong>Create</strong>
+                <strong>Update</strong>
             </li>
         </ol>
     </div>
@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>New volleyball Meetup</h5>
+                    <h5>Update volleyball Meetup</h5>
 
 
 
@@ -55,15 +55,18 @@
 
                     <!-- create form goes here -->
 
-                    <form id="create-form" method="POST">
+                    <form id="update-form" method="POST">
+
+			<input name="event_id" type="hidden" id="event_id" value="<?php echo $event_details['id']; ?>"/>
+			
                         <div class="form-group">
                             <label for="event_name">Name</label>
-                            <input name="event_name" type="text" class="form-control" placeholder="Volleyball Meetup" />
+                            <input name="event_name" type="text" class="form-control" placeholder="Volleyball Meetup" value="<?php echo $event_details['name']; ?>" />
 			</div>
 
                         <div class="form-group">
                             <label for="event_description">Description</label>
-                            <input name="event_description" type="text" class="form-control" placeholder="The usual weekly volleyball :) " />
+                            <input name="event_description" type="text" class="form-control" placeholder="The usual weekly volleyball :) " value="<?php echo $event_details['description']; ?>" />
 			</div>
 
                         <div class="form-group" id="select-date">
@@ -72,7 +75,7 @@
                                 <span class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
 				</span>
-				<input name="event_date" type="text" class="form-control" value="mm/dd/yyyy" />
+				<input name="event_date" type="text" class="form-control" placeholder="mm/dd/yyyy" value="<?php echo date("m-d-Y", strtotime($event_details['event_date'])); ?>" />
 			    </div>
 			</div>
 
@@ -82,19 +85,19 @@
                                 <span class="input-group-addon">
                                     <i class="fa fa-clock-o"></i>
 				</span>
-				<input name="event_time" type="text" class="form-control" value="09:30" />
+				<input name="event_time" type="text" class="form-control" placeholer="09:30" value="<?php echo date("H:i", strtotime($event_details['time'])); ?>" />
 			    </div>
 			</div>
 
                         <div class="form-group">
                             <label for="event_limit">Member limit</label>
-                            <input name="event_limit" type="number" min="1" class="form-control" />
+                            <input name="event_limit" type="number" min="1" class="form-control" value="<?php echo $event_details['limit']; ?>" />
 			</div>
 
                         <br/>
 			
                         <div class="text-center">
-                            <button id="create-event" class="btn btn-success">Save</button>
+                            <button id="update-event" class="btn btn-success">Update</button>
                             <button id="cancel-event" class="btn btn-warning">Cancel</button>
 			</div>
 
@@ -131,8 +134,9 @@
 	 $('.clockpicker').clockpicker();
 
 
-	 $('#create-event').click(function(e) {
+	 $('#update-event').click(function(e) {
 	     e.preventDefault(); // do not reload the page
+	     var eventId = $('input[name=event_id]').val();
 	     var eventName = $('input[name=event_name]').val();
 	     var eventDescription = $('input[name=event_description]').val();
 	     var eventDate = $('input[name=event_date]').val();
@@ -144,9 +148,10 @@
 
 
 	     $.ajax({
-		 url: base_url + "/events/create_form",
+		 url: base_url + "/events/update_form",
 		 type: "POST",
 		 data: {
+		     event_id : eventId,
 		     event_name : eventName,
 		     event_description: eventDescription,
 		     event_date: eventDate,
@@ -171,7 +176,7 @@
 
 	 $('#cancel-event').click(function(e) {
 	     e.preventDefault(); // do not reload the page
-	     $('#create-form').trigger("reset");
+	     $('#update-form').trigger("reset");
 	 });
 
      });

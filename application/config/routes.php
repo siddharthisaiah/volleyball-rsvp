@@ -58,3 +58,4 @@ $route['login'] = 'login';
 $route['home'] = 'dashboard';
 $route['events'] = 'events';
 $route['events/create'] = 'events/create';
+$route['events/update/(:num)'] = 'events/update/$1';
