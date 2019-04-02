@@ -20,5 +20,16 @@ class events_model extends CI_Model {
         return $this->db->insert('events', $data);
     }
 
+    
+    public function get_all_events()
+    {
+        $this->db->select('*');
+        $this->db->from('events');
+        $this->db->order_by('event_date');
+        $this->db->order_by('time');
+
+        return $this->db->get()->result_array();
+    }
+
 
 } //class ends

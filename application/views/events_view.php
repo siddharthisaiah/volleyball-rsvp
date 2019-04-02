@@ -62,22 +62,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+				<?php foreach ($events as $event) { ?>
                                 <tr>
-                                    <td>01/04/2019</td>
-                                    <td>00:00:00</td>
-                                    <td><a href="#">April Fools!</a></td>
-				    <td>
-                                        <a href="#" type="button" class="btn btn-warning btn-rounded btn-circle">
-					    <i class="fa fa-pencil"></i>
-					</a>
+                                    <td>
+					<?php echo $event['event_date']; ?>
 				    </td>
                                     <td>
-					<a href="#" type="button" class="btn btn-danger btn-rounded btn-circle">
-                                            <i class="fa fa-trash"></i>
-					</a>
+					<?php echo $event['time']; ?>
+				    </td>
+                                    <td>
+					<?php echo $event['name']; ?>
 				    </td>
 
+				    <?php if($this->session->userdata('user_role') == 'admin') { ?>
+				    <td>
+                                        <button class="btn btn-group btn-rounded btn-circle">
+                                            <i class="fa fa-pencil"></i>
+					</button>
+				    </td>
+                                    <td>
+					<button class="btn btn-group btn-rounded btn-circle">
+                                            <i class="fa fa-trash"></i>
+					</button>
+				    </td>
+				    <?php } ?>
+
                                 </tr>
+				<?php } ?>
                             </tbody>
                         </table>
 		    </div>

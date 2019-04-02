@@ -8,9 +8,12 @@ class Events extends CI_Controller {
     }
 
     public function index() {
+
         $data['title'] = 'Volleyball | Events';
+        $data['events'] = $this->events_model->get_all_events();
+        
         $this->load->view("templates/header_view", $data);
-        $this->load->view("events_view");
+        $this->load->view("events_view", $data);
         $this->load->view("templates/footer_view");
         
     }
