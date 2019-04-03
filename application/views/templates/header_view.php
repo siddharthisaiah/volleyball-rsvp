@@ -47,7 +47,7 @@
                             </div>
 			</li>
 			<li class="active">
-                            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Home</span></span></a>
+                            <a href="home"><i class="fa fa-th-large"></i> <span class="nav-label">Home</span></span></a>
 			</li>
 			<li >
                             <a href="events"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></span></a>
