@@ -73,7 +73,9 @@
 					    <?php echo $event['time']; ?>
 					</td>
 					<td>
-					    <?php echo $event['name']; ?>
+					    <a href="events/<?php echo $event['id']; ?>">
+						<?php echo $event['name']; ?>
+					    </a>
 					</td>
 
 					<?php if($this->session->userdata('user_role') == 'admin') { ?>

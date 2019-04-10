@@ -99,4 +99,16 @@ class Events extends CI_Controller {
         }
     }
 
+
+    public function details($id)
+    {
+        # Get all the details of the event and display it to user
+        $data['title'] = "Event Details";
+        $data['event_id'] = $id;
+        
+        $this->load->view("templates/header_view", $data);
+        $this->load->view("events_details_view", $data);
+        $this->load->view("templates/footer_view");
+    }
+
 } //class ends
