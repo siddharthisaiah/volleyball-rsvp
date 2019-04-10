@@ -155,9 +155,19 @@
 				 lastName : lastName,
 				 picURl : picUrl,
 				 accessToken : accessToken
+			     },
+			     success: function(response) {
+				 response = JSON.parse(response);
+				 if (response.status == 'success') {
+				     location.reload();
+				 }
+			     },
+
+			     error: function(response) {
+				 alert("could not login, Please try again later");
 			     }
+			     
 			 });
-			 window.location.replace('login');
 		     });
 
 

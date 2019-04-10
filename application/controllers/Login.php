@@ -145,7 +145,7 @@ class Login extends CI_Controller {
 
         $this->session->set_userdata($session_data);
 
-        redirect('home');
+        echo json_encode(array('status' => 'success'));
 
     }
 
