@@ -157,7 +157,7 @@
 				 accessToken : accessToken
 			     }
 			 });
-			 location.reload();
+			 window.location.replace('login');
 		     });
 
 

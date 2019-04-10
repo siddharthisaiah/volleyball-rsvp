@@ -148,6 +148,14 @@ class Login extends CI_Controller {
         redirect('home');
 
     }
+
+
+    public function logout()
+    {
+        session_destroy();
+        redirect('login');
+    }
+        
     
 
 

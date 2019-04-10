@@ -87,7 +87,7 @@
 				<ul class="dropdown-menu animated fadeInRight m-t-xs">
                                     <li><a href="profile.html">Profile</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="login.html">Logout</a></li>
+                                    <li><a href="logout">Logout</a></li>
 				</ul>
 				</div>
 			    </li>

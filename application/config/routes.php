@@ -60,3 +60,4 @@ $route['events'] = 'events';
 $route['events/create'] = 'events/create';
 $route['events/update/(:num)'] = 'events/update/$1';
 $route['events/(:num)'] = 'events/details/$1';
+$route['logout'] = 'login/logout';
