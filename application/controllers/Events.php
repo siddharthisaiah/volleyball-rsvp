@@ -5,6 +5,12 @@ class Events extends CI_Controller {
     public function __construct() {
 		parent::__construct();
         $this->load->model('events_model');
+
+        if (!$this->session->logged_in)
+        {
+            redirect('login');
+        }
+        
     }
 
     public function index() {
@@ -105,6 +111,15 @@ class Events extends CI_Controller {
         # Get all the details of the event and display it to user
         $data['title'] = "Event Details";
         $data['event_id'] = $id;
+
+        // TODO: get all event details
+        $data['event_details'] = $this->events_model->get_event_details($id); // row array
+        $data['confirmed_users'] = $this->events_model->get_event_confirmed_user_details($id); 
+        $data['waitlisted_users'] = $this->events_model->get_event_waitlisted_user_details($id);
+        $data['comments'] = $this->events_model->get_event_comments($id);
+            
+        // TODO: get all attendees, and waitlisted ppls
+        // TODO: get all comments for the event (discussion board)
         
         $this->load->view("templates/header_view", $data);
         $this->load->view("events_details_view", $data);

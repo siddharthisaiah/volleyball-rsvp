@@ -53,9 +53,9 @@
 
 		    <div class="row">
 			<div class="col-lg-6">
-			    <h3>Date : 23/04/2019</h3>
-			    <h3>Time : 16:20</h3>
-			    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac ultrices diam. Maecenas a lorem a massa tristique suscipit. Curabitur elementum, urna eget elementum scelerisque, mauris velit consectetur mi, ut maximus risus dolor quis erat. Maecenas facilisis sapien sapien, eget elementum velit consectetur vel. Nunc fermentum felis nec interdum iaculis. In euismod ipsum ut malesuada gravida. Proin nec enim erat. Donec mattis non enim eget condimentum. Donec feugiat massa consectetur, placerat libero vitae, aliquam tellus.</p>
+			    <h3>Date : <?php echo $event_details['event_date']; ?></h3>
+			    <h3>Time : <?php echo $event_details['time']; ?></h3>
+			    <p><?php echo $event_details['description']; ?></p>
 			</div>
 
 			<div class="col-lg-6">
@@ -80,16 +80,9 @@
                             <a href="#" class=collapsible">Attendees</a>
                             <div class="content">
                                 <ol>
-                                    <li>user 1</li>
-                                    <li>some</li>
-                                    <li>random</li>
-                                    <li>dude</li>
-                                    <li>who</li>
-                                    <li>got</li>
-                                    <li>lucky</li>
-                                    <li>kentucky</li>
-                                    <li>fired</li>
-                                    <li>chicken</li>
+				    <?php foreach($confirmed_users as $cu) { ?>
+                                        <li><?php echo $cu['f_name'] . ' ' . $cu['l_name']; ?></li>
+				    <?php } ?>
                                 </ol>
 			    </div>
 			</div>
@@ -99,11 +92,9 @@
 			    </a>
 			    <div class="content">
 				<ol>
-				    <li>People</li>
-				    <li>Needto</li>
-				    <li>Learn</li>
-				    <li>Howto</li>
-				    <li>Wait!</li>
+				    <?php foreach($waitlisted_users as $wu) { ?>
+                                        <li><?php echo $wu['f_name'] . ' ' . $wu['l_name']; ?></li>
+				    <?php } ?>
 				</ol>
 			    </div>
 			</div>
@@ -115,16 +106,23 @@
                         <div class="col-md-12">
 			    <h3>Discussion Board</h3>
                             <div class="chat-discussion">
+				<?php foreach($comments as $comment) { ?>
                                 <div class="chat-message left">
-				    <img class="message-avatar" alt="" src="static/img/a1.jpg"/>
+				    <img class="message-avatar" alt="profile_pic" src="<?php echo $comment['profile_pic_url']; ?>"/>
                                     <div class="message">
-                                        <a class="message-author" href="#">Siddharth Isaiah</a>
-                                        <span class="message-date">Monday April 1 2019 - 18:54:22</span>
+                                        <a class="message-author" href="#">
+					    <?php echo $comment['f_name'] . " " . $comment['l_name']; ?>
+					</a>
+                                        <span class="message-date">
+					    <?php echo $comment['created_on']; ?>
+					</span>
                                         <span class="message-content">
-					    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac ultrices diam. Maecenas a lorem a massa tristique suscipit. Curabitur elementum, urna eget elementum scelerisque, mauris velit consectetur mi, ut maximus risus dolor quis erat.
+					    <?php echo $comment['comment']; ?>
 					</span>
 				    </div>
 				</div>
+
+				<?php } ?>
 
 			    </div>
 			</div>

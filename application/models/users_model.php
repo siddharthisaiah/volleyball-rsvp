@@ -43,7 +43,8 @@ class users_model extends CI_Model {
             'f_name' => $first_name,
             'l_name' => $last_name,
             'fb_access_token' => $access_token,
-            'profile_pic_url' => $profile_pic_url
+            'profile_pic_url' => $profile_pic_url,
+            'fb_user_id' => $fb_user_id
         );
         return $this->db->insert('users', $data);
 

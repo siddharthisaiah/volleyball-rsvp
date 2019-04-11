@@ -79,7 +79,7 @@
 
                             <li>
 				<div class="dropdown profile-element"> <span>
-				    <img alt="image" class="img-circle" src="static/img/profile_small.jpg" />
+				    <img alt="image" class="img-circle" src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=111665786687236&height=50&width=50&ext=1557515178&hash=AeSGMloMyug7yoKa" />
 				</span>
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 				    <b class="caret"></b>

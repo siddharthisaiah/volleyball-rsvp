@@ -153,7 +153,7 @@
 				 userId : userId,
 				 firstName : firstName,
 				 lastName : lastName,
-				 picURl : picUrl,
+				 picUrl : picUrl,
 				 accessToken : accessToken
 			     },
 			     success: function(response) {
