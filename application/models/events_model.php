@@ -109,9 +109,59 @@ class events_model extends CI_Model {
         $this->db->from('comments AS c');
         $this->db->join('users as u', 'c.user_id = u.id');
         $this->db->where('c.event_id', $id);
-        $this->db->order_by('c.created_on', 'ASC');
+        $this->db->order_by('c.created_on', 'DESC');
 
         return $this->db->get()->result_array();
+    }
+
+    public function save_comment($event_id, $comment)
+    {
+        // whos making the comment
+        $user_id = $this->users_model->get_user_details_from_session()['id'];
+        $timestamp = date("Y-m-d H:i:s");
+
+        $data = array(
+            'event_id' => $event_id,
+            'user_id' => $user_id,
+            'comment' => $comment,
+            'created_on' => $timestamp);
+
+        return $this->db->insert('comments', $data);
+    }
+
+    public function is_user_going_for_event($id)
+    {
+        $user_id = $this->users_model->get_user_details_from_session()['id'];
+        $this->db->select('*');
+        $this->db->from('event_attendees');
+        $this->db->where('event_id', $id);
+        $this->db->where('user_id', $user_id);
+
+        return $this->db->get()->num_rows() > 0;
+    }
+
+
+    public function rsvp_to_event($event_id)
+    {
+        $user_id = $this->users_model->get_user_details_from_session()['id'];
+        $timestamp = date("Y-m-d H:i:s");
+        
+        $data = array(
+            "event_id" => $event_id,
+            "user_id" => $user_id,
+            "updated_at" => $timestamp);
+
+        return $this->db->insert("event_attendees", $data);
+    }
+
+    public function cancel_rsvp_to_event($event_id)
+    {
+        $user_id = $this->users_model->get_user_details_from_session()['id'];
+
+        $this->db->where('event_id', $event_id);
+        $this->db->where('user_id', $user_id);
+
+        return $this->db->delete('event_attendees');
     }
     
 

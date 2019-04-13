@@ -5,6 +5,7 @@ class Events extends CI_Controller {
     public function __construct() {
 		parent::__construct();
         $this->load->model('events_model');
+        $this->load->model('users_model');
 
         if (!$this->session->logged_in)
         {
@@ -117,6 +118,9 @@ class Events extends CI_Controller {
         $data['confirmed_users'] = $this->events_model->get_event_confirmed_user_details($id); 
         $data['waitlisted_users'] = $this->events_model->get_event_waitlisted_user_details($id);
         $data['comments'] = $this->events_model->get_event_comments($id);
+        $data['user_is_going_for_event'] = $this->events_model->is_user_going_for_event($id);
+        
+        
             
         // TODO: get all attendees, and waitlisted ppls
         // TODO: get all comments for the event (discussion board)
@@ -124,6 +128,61 @@ class Events extends CI_Controller {
         $this->load->view("templates/header_view", $data);
         $this->load->view("events_details_view", $data);
         $this->load->view("templates/footer_view");
+    }
+
+    public function save_comment()
+    {
+     $event_id = $this->input->post('event_id');
+     $comment = $this->input->post('comment');
+
+     $save_comment = $this->events_model->save_comment($event_id, $comment);
+     if ($save_comment)
+     {
+         echo json_encode(array("status" => "success", "message" => "comment saved successfully"));
+     }
+     else
+     {
+         echo json_encode(array("status" => "failure", "message" => "comment could not be saved"));
+     }
+
+    }
+
+    public function rsvp_to_event()
+    {
+        $event_id = $this->input->post('event_id');
+
+
+        $rsvp_successfull = $this->events_model->rsvp_to_event($event_id);
+
+        if($rsvp_successfull)
+        {
+
+            //            echo "success"; die;
+            echo json_encode(array("status" => "success", "message" => "RSVP shit"));
+        }
+        else
+        {
+            //            echo "failure"; die;
+            echo json_encode(array("status" => "failure", "message" => "RSVP shit failure"));
+        }
+
+    }
+
+
+    public function cancel_rsvp_to_event()
+    {
+        $event_id = $this->input->post('event_id');
+
+        $rsvp_cancel_successfull = $this->events_model->cancel_rsvp_to_event($event_id);
+
+        if($rsvp_cancel_successfull)
+        {
+            echo json_encode(array("status" => "success", "message" => "RSVP shit"));
+        }
+        else
+        {
+            echo json_encode(array("status" => "failure", "message" => "RSVP shit failure"));
+        }
     }
 
 } //class ends

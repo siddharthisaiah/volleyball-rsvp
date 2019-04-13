@@ -68,7 +68,24 @@
                     <hr/>
 		    
                     <div>
-                        <p>Are you going? <b>RSVP: Yes | No</b></p>
+                        <p>
+			    <b>RSVP: </b>
+			    <?php if($user_is_going_for_event) { ?>
+				You are going for this event
+			    <?php } else { ?>
+				Your are NOT going for this event
+			    <?php } ?>
+
+				<button id="rsvp-yes" class="btn btn-xs btn-primary" title="Im going">
+				    <i class="fa fa-check"></i>
+				</button>
+
+
+				<button id="rsvp-no" class="btn btn-xs btn-danger" title="cancel">
+				    <i class="fa fa-times"></i>
+				</button>
+
+			</p>
 		    </div>
 
                     <hr/>
@@ -138,8 +155,8 @@
                                     <textarea id="comment-text" name="comment-text" class="form-control message-input" placeholder="Write a comment here."></textarea>
                                     <br/>
                                     <div class="text-center">
-					<button class="btn btn-group btn-primary">Comment</button>
-					<button class="btn btn-group btn-danger">Cancel</button>
+					<button id="save-comment" class="btn btn-group btn-primary">Comment</button>
+					<button id="cancel-comment" class="btn btn-group btn-danger">Cancel</button>
 				    </div>
                                 </div>
                             </div>
@@ -157,5 +174,108 @@
 
 
 <script>
- 
+
+ $('#save-comment').click(function() {
+     var comment = $('#comment-text').val().trim();
+     var event_id = <?php echo $event_details['id']; ?>;
+     
+     if (comment == '' || comment == null || comment == undefined) {
+	 alert("Cannot save a blank comment");
+	 return false;
+     }
+
+     $.ajax({
+	 url: base_url + "events/save_comment",
+	 type: "POST",
+	 data: {
+	     comment: comment,
+	     event_id: event_id
+	 },
+	 success: function(response) {
+	     response = JSON.parse(response);
+	     if(response.status == "success") {
+		 location.reload();
+	     } else {
+		 alert("could not save comment, Please try again later");
+	     }
+	 },
+	 error: function(response) {
+	     response = JSON.parse(response);
+	     alert("could not save comment, Please try again later");
+	 }
+
+     });
+ });
+
+
+ // clear the textarea 
+ $('#cancel-comment').click(function() {
+     $('#comment-text').val('');
+ });
+
+
+ $('#rsvp-yes').click(function() {
+     var userIsGoing = <?php echo ($user_is_going_for_event ? 1 : 0); ?>;
+     var eventId = <?php echo $event_id; ?>;
+     
+     if(userIsGoing) {
+	 alert("You are going for this event!");
+	 return true;
+     }
+
+     $.ajax({
+	 url: base_url + "events/rsvp_to_event",
+	 type: "POST",
+	 data: {
+	     event_id : eventId
+	 },
+	 success: function(response) {
+	     response = JSON.parse(response);
+	     
+	     if(response.status == "success") {
+		 console.log("You are now going for this event");
+		 location.reload();
+	     } else {
+		 alert("something went wrong, please try again later");
+	     }
+	 },
+
+	 error: function(response) {
+	     alert("Could not RSVP, Please try again later");
+	 }
+     });
+
+ });
+
+ $('#rsvp-no').click(function() {
+     var userIsGoing = <?php echo ($user_is_going_for_event ? 1 : 0); ?>;
+     var eventId = <?php echo $event_id; ?>;
+     
+     if(!userIsGoing) {
+	 alert("You are not going for this event!");
+	 return true;
+     }
+
+     $.ajax({
+	 url: base_url + "events/cancel_rsvp_to_event",
+	 type: "POST",
+	 data: {
+	     event_id : eventId
+	 },
+	 success: function(response) {
+	     response = JSON.parse(response);
+	     
+	     if(response.status == "success") {
+		 console.log("You are now not going for this event");
+		 location.reload();
+	     } else {
+		 alert("something went wrong, please try again later");
+	     }
+	 },
+
+	 error: function(response) {
+	     alert("Could not cancel, Please try again later");
+	 }
+     });
+ });
 </script>

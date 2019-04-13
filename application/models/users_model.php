@@ -51,4 +51,15 @@ class users_model extends CI_Model {
     }
 
 
+    public function get_user_details_from_session()
+    {
+        $user_id = $this->session->id;
+        
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('id', $user_id);
+        
+        return $this->db->get()->row_array();
+    }
+
 } //class ends
