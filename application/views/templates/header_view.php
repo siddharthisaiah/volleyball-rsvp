@@ -39,7 +39,7 @@
                     <ul class="nav metismenu" id="side-menu">
 			<li class="nav-header">
                             <div class="dropdown profile-element"> <span>
-				<img alt="image" class="img-circle" src="static/img/profile_small.jpg" />
+				<img alt="image" class="img-circle" src="static/img/vb.jpg" height="100" widht="100" />
                             </span>
                             </div>
                             <div class="logo-element">
@@ -62,11 +62,15 @@
 		    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
 			<div class="navbar-header">
 			    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+			    <!--  hide the search bar for now - theres nothing to search!
 			    <form role="search" class="navbar-form-custom" action="search_results.html">
 				<div class="form-group">
 				    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
 				</div>
 			    </form>
+
+			    -->
 			</div>
 			<ul class="nav navbar-top-links navbar-right">
 			    <li>
@@ -79,14 +83,16 @@
 
                             <li>
 				<div class="dropdown profile-element"> <span>
-				    <img alt="image" class="img-circle" src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=111665786687236&height=50&width=50&ext=1557515178&hash=AeSGMloMyug7yoKa" />
+				    <img alt="image" class="img-circle" src="<?php echo $this->session->userdata('pic_url'); ?>" />
 				</span>
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 				    <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li><a href="profile.html">Profile</a></li>
+                                    <!--
+				    <li><a href="profile.html">Profile</a></li>
                                     <li class="divider"></li>
+				    -->
                                     <li><a href="logout">Logout</a></li>
 				</ul>
 				</div>

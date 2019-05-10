@@ -137,11 +137,11 @@ class Login extends CI_Controller {
             'first_name' => $user_details['f_name'],
             'last_name'  => $user_details['l_name'],
             'logged_in'  => TRUE,
-            'user_role'  => 'admin',
             'is_fb_user' => TRUE,
             'fb_user_id' => $user_details['fb_user_id'],
             'id' => $user_details['id'],
-            'user_role' => $user_details['role']
+            'user_role' => $user_details['role'],
+            'pic_url' => $user_details['profile_pic_url']
         );
 
         $this->session->set_userdata($session_data);

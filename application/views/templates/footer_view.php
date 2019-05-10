@@ -3,7 +3,7 @@
 
     </div>
     <div>
-	<strong>Copyright</strong> Siddharth Isaiah © 2014-<?php echo date('Y'); ?>
+	<strong>Copyright</strong> Siddharth Isaiah © <?php echo date('Y'); ?>
     </div>
 </div>
 
